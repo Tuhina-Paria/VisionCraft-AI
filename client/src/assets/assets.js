@@ -18,6 +18,14 @@ import cross_icon from './cross_icon.svg'
 import star_group from './star_group.png'
 import credit_star from './credit_star.svg'
 import profile_icon from './profile_icon.png'
+import image2 from './image2.png'
+import image3 from './image3.png'
+import image4 from './image4.jpg'
+import image5 from './image5.png'
+import image6 from './image6.jpg'
+import image7 from './image7.jpg'
+import image8 from './image8.jpg'
+
 
 export const assets = {
     logo,
@@ -34,7 +42,15 @@ export const assets = {
     cross_icon,
     star_group,
     credit_star,
-    profile_icon
+    profile_icon,
+    image2,
+    image3,
+    image4,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8
 }
 
 export const stepsData = [
