@@ -9,6 +9,7 @@ import sample_img_1 from './sample_img_1.png'
 import sample_img_2 from './sample_img_2.png'
 import profile_img_1 from './profile_img_1.png'
 import profile_img_2 from './profile_img_2.png'
+import profile_img_3 from './profile_img_3.png'
 import step_icon_1 from './step_icon_1.svg'
 import step_icon_2 from './step_icon_2.svg'
 import step_icon_3 from './step_icon_3.svg'
@@ -37,6 +38,7 @@ export const assets = {
     rating_star,
     sample_img_1,
     sample_img_2,
+    profile_img_3,
     email_icon,
     lock_icon,
     cross_icon,
@@ -77,21 +79,21 @@ export const testimonialsData = [
         name:'Donald Jackman',
         role:'Graphic Designer',
         stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
+        text:"I’ve been using this text-to-image generator for nearly 2 months, mainly for my Design. It’s incredibly easy to use and turns simple prompts into stunning visuals, saving me hours of work every week."
     },
     {
         image:profile_img_2,
         name:'Richard Nelson',
         role:'Content Creator',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
+        stars:4,
+        text:"I’ve been using this text-to-image generator for nearly 2 months, mainly for my Instagram content. It’s incredibly easy to use and turns simple prompts into stunning visuals, saving me hours of work every week."
     },
     {
-        image:profile_img_1,
-        name:'Donald Jackman',
+        image:profile_img_3,
+        name:'Tom Jackman',
         role:' Graphic Designer',
         stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
+        text:"I’ve been using this text-to-image generator for nearly 2 months, mainly for my design. It’s incredibly easy to use and turns simple prompts into stunning visuals, saving me hours of work every week."
     },
 ]
 

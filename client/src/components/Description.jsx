@@ -8,10 +8,10 @@ const Description = () => {
       {/* Heading */}
       <div className="text-center mb-14">
         <h1 className="text-3xl sm:text-4xl font-semibold text-white">
-          Create AI Images
+          Introducing VisionCraft AI
         </h1>
         <p className="mt-2 text-gray-400 text-sm sm:text-base">
-          Turn your imagination into visuals
+          Transform ideas into stunning AI-generated visuals
         </p>
       </div>
 
@@ -21,24 +21,24 @@ const Description = () => {
         {/* Image */}
         <img
           src={assets.image7}
-          alt="AI image generation"
+          alt="VisionCraft AI preview"
           className="w-full rounded-xl"
         />
 
         {/* Text */}
         <div>
-          <h2 className="text-2xl sm:text-3xl font-medium text-white mb-4">
-            AI-Powered Text to Image Generator
-          </h2>
+          <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">
+            Create images using simple text prompts
+          </h3>
 
           <p className="text-gray-400 mb-4 leading-relaxed">
-            Create high-quality images from simple text prompts using our
-            advanced AI technology. No design skills required.
+            VisionCraft AI is an intelligent text-to-image platform that
+            converts your words into high-quality visuals in seconds.
           </p>
 
           <p className="text-gray-400 leading-relaxed">
-            Whether you're an artist, creator, or developer, VisionCraft
-            helps you generate visuals faster and easier.
+            Designed for creators, developers, and artists who want
+            speed, creativity, and precision — without complexity.
           </p>
         </div>
 
