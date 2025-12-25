@@ -1,8 +1,8 @@
 import logo from './logo.svg'
 import logo_icon from './logo_icon.svg'
-import facebook_icon from './facebook_icon.svg'
-import instagram_icon from './instagram_icon.svg'
-import twitter_icon from './twitter_icon.svg'
+import facebook_icon2 from './facebook_icon2.svg'
+import instagram_icon2 from './instagram_icon2.svg'
+import twitter_icon1 from './twitter_icon1.svg'
 import star_icon from './star_icon.svg'
 import rating_star from './rating_star.svg'
 import sample_img_1 from './sample_img_1.png'
@@ -31,9 +31,9 @@ import image8 from './image8.jpg'
 export const assets = {
     logo,
     logo_icon,
-    facebook_icon,
-    instagram_icon,
-    twitter_icon,
+    facebook_icon2,
+    instagram_icon2,
+    twitter_icon1,
     star_icon,
     rating_star,
     sample_img_1,
