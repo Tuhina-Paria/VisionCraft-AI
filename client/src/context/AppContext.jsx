@@ -9,7 +9,7 @@ const [open, setOpen] = useState(false);
   const [showUserLogin,setShowUserLogin]=useState(false);
 
   const value={
-    open,setOpen,user,setUser
+    open,setOpen,user,setUser,showUserLogin,setShowUserLogin
   }
   return (
     <AppContext.Provider value={value}>

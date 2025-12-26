@@ -5,10 +5,14 @@ const Result = () => {
   const [image, setImage] = useState(assets.sample_img_1);
   const [isImageLoaded, setIsImageLoaded] = useState(true);
   const [loading, setLoading] = useState(false);
-  const[input,setInput]=useState("")
+  const[input,setInput]=useState("");
+
+  const onSubmitHandler=async(e)=>{
+
+  }
 
   return (
-    <form className="min-h-[90vh] flex flex-col items-center justify-center px-4">
+    <form onSubmit={onSubmitHandler} className="min-h-[90vh] flex flex-col items-center justify-center px-4">
 
       {/* IMAGE PREVIEW */}
       <div className="w-full flex flex-col items-center">
