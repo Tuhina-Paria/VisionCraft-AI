@@ -1,5 +1,6 @@
 import React from "react";
 import { stepsData } from "../assets/assets";
+import { motion } from "framer-motion";
 
 const Steps = () => {
   return (
@@ -10,7 +11,13 @@ const Steps = () => {
       </div>
 
       {/* Heading */}
-      <div className="flex flex-col items-center text-center">
+      <motion.div 
+      initial={{opacity:0.2,y:100}}
+      transition={{duration: 1}}
+      whileInView={{opacity:1,y:0}}
+      viewport={{once:true}}
+      
+      className="flex flex-col items-center text-center">
         <h1 className="text-2xl sm:text-4xl font-bold text-white">
           How it Works
         </h1>
@@ -71,7 +78,7 @@ const Steps = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
