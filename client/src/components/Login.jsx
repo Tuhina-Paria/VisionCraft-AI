@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [state, setState] = useState("Login");
@@ -23,7 +24,14 @@ const Login = () => {
         " />
 
         {/* Card */}
-        <form className="
+        <motion.form 
+initial={{ opacity: 0.2, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        viewport={{ once: true }}
+
+
+        className="
           relative rounded-3xl
           bg-white/85 backdrop-blur-2xl
           p-8
@@ -171,7 +179,7 @@ const Login = () => {
               </>
             )}
           </p>
-        </form>
+        </motion.form>
       </div>
     </div>
   );

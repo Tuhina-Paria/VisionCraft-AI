@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
+import { motion } from "framer-motion";
+
 
 const Result = () => {
   const [image, setImage] = useState(assets.sample_img_1);
-  const [isImageLoaded, setIsImageLoaded] = useState(true);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const[input,setInput]=useState("");
 
@@ -12,7 +14,13 @@ const Result = () => {
   }
 
   return (
-    <form onSubmit={onSubmitHandler} className="min-h-[90vh] flex flex-col items-center justify-center px-4">
+    <motion.form 
+    initial={{ opacity: 0.2, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+    
+    onSubmit={onSubmitHandler} className="min-h-[90vh] flex flex-col items-center justify-center px-4">
 
       {/* IMAGE PREVIEW */}
       <div className="w-full flex flex-col items-center">
@@ -140,7 +148,7 @@ const Result = () => {
           </a>
         </div>
       )}
-    </form>
+    </motion.form>
   );
 };
 

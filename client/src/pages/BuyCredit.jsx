@@ -2,6 +2,7 @@ import React from "react";
 import { plans } from "../assets/assets";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { motion } from "framer-motion";
 
 const BuyCredit = () => {
   const {user}=useContext(AppContext);
@@ -9,7 +10,15 @@ const BuyCredit = () => {
     <div className="min-h-[80vh] px-4 pt-16 mb-14 text-white">
 
       {/* Header */}
-      <div className="text-center mb-12 mt-20">
+      <motion.div
+      
+initial={{ opacity: 0.2, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+
+
+      className="text-center mb-12 mt-20">
         <button className="mb-6 px-8 py-2 rounded-full border border-white/20 text-sm text-white/70 hover:text-white transition">
           Our Plans
         </button>
@@ -21,10 +30,15 @@ const BuyCredit = () => {
         <p className="mt-3 text-sm text-white/60 max-w-md mx-auto">
           Flexible pricing for creators. Upgrade anytime.
         </p>
-      </div>
+      </motion.div>
 
       {/* Plans */}
-      <div className="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div 
+      initial={{ opacity: 0.2, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      className="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {plans.map((item, index) => (
           <div
             key={index}
@@ -75,7 +89,7 @@ const BuyCredit = () => {
             </button>
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
