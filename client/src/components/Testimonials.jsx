@@ -1,5 +1,34 @@
 import React from "react";
 import { assets, testimonialsData } from "../assets/assets";
+import { motion } from "framer-motion";
+
+/* ================= ANIMATIONS ================= */
+
+// Parent container (controls stagger)
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.25, // delay between cards
+    },
+  },
+};
+
+// Each card animation
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 const Testimonials = () => {
   return (
@@ -12,7 +41,13 @@ const Testimonials = () => {
       " />
 
       {/* Heading */}
-      <div className="text-center mb-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-20"
+      >
         <h1 className="
           text-3xl sm:text-4xl lg:text-5xl
           font-bold text-white
@@ -20,6 +55,7 @@ const Testimonials = () => {
         ">
           Loved by creators worldwide
         </h1>
+
         <p className="
           mt-4 text-gray-400
           text-sm sm:text-base
@@ -27,19 +63,26 @@ const Testimonials = () => {
         ">
           Real feedback from people building, creating, and imagining with VisionCraft AI.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Cards */}
-      <div className="
-        grid grid-cols-1
-        sm:grid-cols-2
-        lg:grid-cols-3
-        gap-6 sm:gap-8
-        max-w-7xl mx-auto
-      ">
+      {/* Cards container (IMPORTANT PART) */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="
+          grid grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-6 sm:gap-8
+          max-w-7xl mx-auto
+        "
+      >
         {testimonialsData.map((testimonial, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={fadeUp}
             className="
               relative group
               rounded-3xl p-6 sm:p-7
@@ -100,9 +143,9 @@ const Testimonials = () => {
             ">
               “{testimonial.text}”
             </p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

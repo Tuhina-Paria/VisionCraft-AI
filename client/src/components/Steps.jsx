@@ -2,22 +2,48 @@ import React from "react";
 import { stepsData } from "../assets/assets";
 import { motion } from "framer-motion";
 
+/* Parent container (controls stagger) */
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.25, // delay between steps
+    },
+  },
+};
+
+/* Individual step animation */
+const stepVariant = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
 const Steps = () => {
   return (
     <section className="relative my-24 px-4">
-      {/* Neon background glow */}
+      {/* Background glow */}
       <div className="absolute inset-0 -z-10 flex justify-center">
         <div className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-purple-600/30 blur-[160px]" />
       </div>
 
       {/* Heading */}
-      <motion.div 
-      initial={{opacity:0.2,y:100}}
-      transition={{duration: 1}}
-      whileInView={{opacity:1,y:0}}
-      viewport={{once:true}}
-      
-      className="flex flex-col items-center text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="flex flex-col items-center text-center"
+      >
         <h1 className="text-2xl sm:text-4xl font-bold text-white">
           How it Works
         </h1>
@@ -25,11 +51,18 @@ const Steps = () => {
           Transform words into stunning images
         </p>
 
-        {/* Steps */}
-        <div className="w-full max-w-3xl space-y-5">
-          {stepsData.map((item, index) => (
-            <div
+        {/* Steps container */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="w-full max-w-3xl space-y-5"
+        >
+          {stepsData.map((step, index) => (
+            <motion.div
               key={index}
+              variants={stepVariant}
               className="
                 group
                 flex flex-col sm:flex-row
@@ -59,25 +92,21 @@ const Steps = () => {
                   group-hover:scale-110
                 "
               >
-                <img
-                  src={item.icon}
-                  alt={item.title}
-                  className="w-5 h-5"
-                />
+                <img src={step.icon} alt={step.title} className="w-5 h-5" />
               </div>
 
               {/* Text */}
               <div className="text-center sm:text-left">
                 <h2 className="text-base sm:text-lg font-semibold text-white">
-                  {item.title}
+                  {step.title}
                 </h2>
                 <p className="text-xs sm:text-sm text-purple-200 mt-1 leading-relaxed">
-                  {item.description}
+                  {step.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );
