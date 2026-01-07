@@ -2,10 +2,56 @@ import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import { motion } from "framer-motion";
+import axios from 'axios'
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [state, setState] = useState("Login");
-  const { setShowUserLogin } = useContext(AppContext);
+  const { setShowUserLogin,backendUrl,setToken,setUser} = useContext(AppContext);
+
+const [name,setName]=useState('')
+const [email,setEmail]=useState('')
+const [password,setPassword]=useState('')
+
+console.log("API URL:", backendUrl + "/api/user/register");
+
+
+const onSubmitHandler =async(e)=>{
+  e.preventDefault();
+
+  try {
+    if(state == 'Login'){
+     const {data}= await  axios.post(backendUrl + '/api/user/login',{email,password})
+
+     if(data.success){
+      setToken(data.token)
+      setUser(data.user)
+      localStorage.setItem('token',data.token)
+      setShowUserLogin(false)
+     }else{
+      toast.error(data.message)
+     }
+
+
+    }else{
+      const {data}= await  axios.post(backendUrl + '/api/user/register',{name,email,password})
+
+     if(data.success){
+      setToken(data.token)
+      setUser(data.user)
+     localStorage.setItem("token", data.token)
+
+      setShowUserLogin(false)
+     }else{
+      toast.error(data.message)
+     }
+    }
+  } catch (error) {
+    toast.error(error.message)
+  }
+}
+
+
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -24,7 +70,7 @@ const Login = () => {
         " />
 
         {/* Card */}
-        <motion.form 
+        <motion.form onSubmit={onSubmitHandler}
 initial={{ opacity: 0.2, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
@@ -86,6 +132,7 @@ initial={{ opacity: 0.2, y: 60 }}
               ">
                 <img src={assets.user_icon} className="w-4 opacity-90" />
                 <input
+                onChange={e => setName(e.target.value)} value={name}
                   type="text"
                   placeholder="Full name"
                   className="w-full bg-transparent outline-none text-sm text-black placeholder:text-neutral-500"
@@ -106,6 +153,7 @@ initial={{ opacity: 0.2, y: 60 }}
             ">
               <img src={assets.email_icon} className="w-4 opacity-90" />
               <input
+              onChange={e => setEmail(e.target.value)} value={email}
                 type="email"
                 placeholder="Email address"
                 className="w-full bg-transparent outline-none text-sm text-black placeholder:text-neutral-500"
@@ -125,6 +173,7 @@ initial={{ opacity: 0.2, y: 60 }}
             ">
               <img src={assets.lock_icon} className="w-4 opacity-90" />
               <input
+              onChange={e => setPassword(e.target.value)} value={password}
                 type="password"
                 placeholder="Password"
                 className="w-full bg-transparent outline-none text-sm text-black placeholder:text-neutral-500"
@@ -161,7 +210,8 @@ initial={{ opacity: 0.2, y: 60 }}
               <>
                 Don’t have an account?{" "}
                 <span
-                  onClick={() => setState("Sign Up")}
+                 onClick={() => setState("Register")}
+
                   className="relative text-purple-600 font-medium cursor-pointer after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-purple-600 hover:after:w-full after:transition-all"
                 >
                   Sign up
