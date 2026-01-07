@@ -41,7 +41,7 @@ const Result = () => {
       link.href = blobUrl;
 
       // You can name the downloaded file here
-      link.download = "vision-craft.png";
+      link.download = "visioncraftAI.png";
 
       // Append to body, click to download, and remove
       document.body.appendChild(link);
