@@ -181,12 +181,12 @@ initial={{ opacity: 0.2, y: 60 }}
             </div>
           </div>
 
-          {/* Forgot */}
+          {/* Forgot
           {state === "Login" && (
             <p className="mt-3 text-right text-xs text-purple-600 cursor-pointer hover:underline">
               Forgot password?
             </p>
-          )}
+          )} */}
 
           {/* CTA */}
           <button
