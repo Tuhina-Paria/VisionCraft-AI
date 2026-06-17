@@ -1,19 +1,22 @@
 import express from 'express'
 import cors from 'cors'
 
-import 'dotenv/config' 
+import 'dotenv/config'
 import connectDB from './config/mongodb.js'
 import userRouter from './routes/userRoutes.js'
 import imageRouter from './routes/imageRoutes.js'
 
-
-const PORT=process.env.PORT||4000
-const app=express()
+const PORT = process.env.PORT || 4000
+const app = express()
 
 const allowedOrigins = [
   "http://localhost:5173",
   "https://vision-craft-ai-gamma.vercel.app"
 ];
+
+// 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: function(origin, callback) {
@@ -26,13 +29,13 @@ app.use(cors({
   credentials: true
 }));
 
-await connectDB()
+await connectDB();
 
+app.use('/api/user', userRouter);
+app.use('/api/image', imageRouter);
 
+app.get('/', (req, res) => res.send("API is Working"));
 
-app.use('/api/user',userRouter)
-app.use('/api/image',imageRouter)
-app.get('/',(req,res)=>res.send("API is Working"))
-
-
-app.listen(PORT,()=>console.log("Server running on port "+ PORT));
+app.listen(PORT, () =>
+  console.log("Server running on port " + PORT)
+);
