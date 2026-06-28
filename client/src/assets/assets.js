@@ -4,6 +4,7 @@ import facebook_icon2 from './facebook_icon2.svg'
 import instagram_icon2 from './instagram_icon2.svg'
 import twitter_icon1 from './twitter_icon1.svg'
 import star_icon from './star_icon.svg'
+import { Zap, Shield, Cloud } from "lucide-react";
 import rating_star from './rating_star.svg'
 import sample_img_1 from './sample_img_1.png'
 import sample_img_2 from './sample_img_2.png'
@@ -73,28 +74,25 @@ export const stepsData = [
     },
   ];
 
-export const testimonialsData = [
-    {
-        image:profile_img_1,
-        name:'Donald Jackman',
-        role:'Graphic Designer',
-        stars:5,
-        text:"I’ve been using this text-to-image generator for nearly 2 months, mainly for my Design. It’s incredibly easy to use and turns simple prompts into stunning visuals, saving me hours of work every week."
-    },
-    {
-        image:profile_img_2,
-        name:'Richard Nelson',
-        role:'Content Creator',
-        stars:4,
-        text:"I’ve been using this text-to-image generator for nearly 2 months, mainly for my Instagram content. It’s incredibly easy to use and turns simple prompts into stunning visuals, saving me hours of work every week."
-    },
-    {
-        image:profile_img_3,
-        name:'Tom Jackman',
-        role:' Graphic Designer',
-        stars:5,
-        text:"I’ve been using this text-to-image generator for nearly 2 months, mainly for my design. It’s incredibly easy to use and turns simple prompts into stunning visuals, saving me hours of work every week."
-    },
+export const featuresData = [
+   {
+    icon: Zap,
+    title: "AI Image Generation",
+    subtitle: "Powered by AI",
+    text: "Generate high-quality images from simple text prompts in seconds using advanced AI models. Turn ideas into professional visuals instantly.",
+  },
+  {
+    icon: Shield,
+    title: "Secure Authentication",
+    subtitle: "JWT Authentication",
+    text: "JWT-based authentication secures every user account. Only authenticated users can generate, save, download, and manage their personal images.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud Storage",
+    subtitle: "Cloudinary Integration",
+    text: "Every generated image is securely stored in Cloudinary, providing fast delivery, reliable storage, and seamless access across devices.",
+  },
 ]
 
 export const plans = [

@@ -1,18 +1,20 @@
 import React from 'react'
 import Header from '../components/Header'
 import Steps from '../components/Steps'
-import Description from '../components/Description'
-import Testimonials from '../components/Testimonials'
+// import Description from '../components/Description'
+import Features from '../components/Features'
 import GenerateBtn from '../components/GenerateBtn'
+import Showcase from '../components/Showcase'
 
 const Home = () => {
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-[#0f0d2b] to-[#1a1640] pt-20">
+    <div className="w-full min-h-screen bg-black">
 
       <Header/>
+      <Showcase/>
       <Steps/>
-      <Description/>
-      <Testimonials/>
+      {/* <Description/> */}
+      <Features/>
       <GenerateBtn/>
     </div>
   )

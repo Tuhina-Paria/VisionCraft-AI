@@ -16,83 +16,58 @@ const GenerateBtn = () => {
   };
 
   return (
-    <section className="relative my-28 px-4 text-center overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 -z-10 flex justify-center items-center">
-        <div className="w-[220px] h-[220px] sm:w-[420px] sm:h-[420px] bg-purple-600/25 blur-[130px]" />
-      </div>
-
+    <section className="bg-black py-20 px-6">
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="max-w-xl mx-auto flex flex-col items-center"
+        className="
+        max-w-4xl
+        mx-auto
+        text-center
+        "
       >
-        {/* Heading */}
-        <h1
+        <h2
           className="
-            text-2xl sm:text-4xl lg:text-5xl
-            font-semibold leading-tight tracking-tight
-            text-transparent bg-clip-text
-            bg-gradient-to-r from-white via-purple-300 to-pink-400
-            mb-10
+          text-white
+          text-4xl
+          md:text-6xl
+          font-bold
+          tracking-[-0.04em]
           "
         >
-          See the magic.
-          <br />
-          Try it now.
-        </h1>
+         Ready to turn your ideas into images?
+        </h2>
 
-        {/* CTA Button */}
+        <p
+          className="
+          mt-6
+          text-gray-400
+          text-lg
+          max-w-2xl
+          mx-auto
+          "
+        >
+         Every great design starts with a single prompt.
+        </p>
+
         <motion.button
           onClick={onClickHandler}
-          whileHover={{ y: -1 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.2 }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
           className="
-            relative group
-
-            /* MOBILE (compact) */
-            px-5 py-2.5
-            text-sm
-            rounded-lg
-
-            /* TABLET + DESKTOP */
-            sm:px-10 sm:py-3.5
-            sm:text-base
-            sm:rounded-xl
-
-            border border-purple-400/40
-
-            
-           bg-gradient-to-r from-purple-600 to-fuchsia-600
-
-            backdrop-blur-md
-            font-medium text-white tracking-wide
-
-            hover:shadow-[0_0_36px_-12px_rgba(168,85,247,0.9)]
-            transition-all duration-300
+          mt-10
+          px-8
+          py-4
+          rounded-full
+          bg-white
+          text-black
+          font-semibold
+          transition
           "
         >
-          {/* Soft neon overlay */}
-          <span
-            className="
-              pointer-events-none
-              absolute inset-0 rounded-[inherit]
-            
-             bg-gradient-to-r from-purple-600 to-fuchsia-600
-              opacity-0 group-hover:opacity-100
-              transition
-            "
-          />
-
-          <span className="relative flex items-center gap-1.5">
-            Generate Image
-            <span className="opacity-60 group-hover:opacity-100 transition">
-              →
-            </span>
-          </span>
+          Start Creating
         </motion.button>
       </motion.div>
     </section>

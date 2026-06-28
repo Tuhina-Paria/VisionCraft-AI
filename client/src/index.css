@@ -12,20 +12,12 @@
 html, body {
   min-height: 100%;
   margin: 0;
-  background: linear-gradient(to bottom, #0f0d2b, #1a1640);
+  background:  black;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.4s ease-out;
+.scrollbar-hide {
+  scrollbar-width: none;
 }

@@ -1,59 +1,81 @@
 import React, { useState, useContext } from "react";
-import { assets } from "../assets/assets";
+import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { AppContext } from "../context/AppContext";
 
 const Result = () => {
-  const [image, setImage] = useState(assets.sample_img_1);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const [showTooltip, setShowTooltip] = useState(false);
+  const [error, setError] = useState("");
 
   const { generateImage, credit } = useContext(AppContext);
 
+  // ---------------- GENERATE IMAGE ----------------
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (!input || credit === 0) return;
 
-    setLoading(true);
-    const img = await generateImage(input);
+    const prompt = input.trim();
 
-    if (img) {
-      setImage(img);
-      setIsImageLoaded(true);
+    // ❗ HARD VALIDATION (FIX YOUR BUG)
+    if (!prompt) {
+      setError("Please enter a prompt before generating.");
+      return;
     }
 
-    setLoading(false);
+    if (credit <= 0 || loading) return;
+
+    setError("");
+
+    try {
+      setLoading(true);
+
+      const img = await generateImage(prompt);
+
+      if (img) {
+        setImage(img);
+        // setInput(""); // clear input after success
+      } else {
+        setError("Unable to generate image. Try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // ---------------- DOWNLOAD IMAGE ----------------
   const handleDownload = async (url) => {
     try {
-      // Fetch the image as a blob
-      const response = await fetch(url, { mode: "cors" });
-      if (!response.ok) throw new Error("Network response was not ok");
-
+      const response = await fetch(url);
       const blob = await response.blob();
-
-      // Create a temporary link to trigger download
       const blobUrl = window.URL.createObjectURL(blob);
+
       const link = document.createElement("a");
       link.href = blobUrl;
-
-      // You can name the downloaded file here
       link.download = "visioncraftAI.png";
-
-      // Append to body, click to download, and remove
       document.body.appendChild(link);
       link.click();
       link.remove();
 
-      // Release the object URL
       window.URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error("Download failed:", error);
-      alert("Failed to download image. Please try again.");
+
+      toast.success("Image downloaded successfully.");
+    } catch (err) {
+      console.error(err);
+      window.open(url, "_blank");
+      toast.error("Download failed, opening image instead.");
     }
+  };
+
+  // ---------------- RESET ----------------
+  const handleReset = () => {
+    setImage(null);
+    setInput("");
+    setError("");
   };
 
   return (
@@ -65,145 +87,157 @@ const Result = () => {
       onSubmit={onSubmitHandler}
       className="min-h-[90vh] flex flex-col items-center justify-center px-4"
     >
-      {/* IMAGE PREVIEW */}
-      <div className="w-full flex flex-col items-center">
-        <div className="relative mt-20">
-          <img
-            src={image}
-            alt="Generated"
-            className="
-              w-[320px] sm:w-[420px]
-              rounded-2xl
-              shadow-[0_20px_60px_rgba(0,0,0,0.55)]
-              border border-white/10
-            "
-          />
+      {/* HEADER */}
+      <div className="text-center mb-12 mt-20">
+        <h1 className="text-white text-5xl md:text-6xl font-bold">
+          Create Images
+        </h1>
+        <p className="mt-4 text-gray-500 text-lg">
+          Turn ideas into visuals in seconds.
+        </p>
+      </div>
 
+      {/* IMAGE PREVIEW */}
+      {(loading || image) && (
+        <div className="w-full flex flex-col items-center mt-16">
           {loading && (
-            <span
-              className="
-                absolute bottom-0 left-0 h-[2px] w-full
-                bg-gradient-to-r from-purple-500 to-fuchsia-500
-                animate-pulse
-              "
+            <div className="w-full max-w-4xl h-[250px] rounded-[28px] border border-white/10 bg-[#111] flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin mx-auto" />
+                <p className="mt-6 text-white/70">
+                  Creating your image...
+                </p>
+              </div>
+            </div>
+          )}
+
+          {!loading && image && (
+            <motion.img
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              src={image}
+              alt="Generated"
+              className="w-full max-w-4xl rounded-[28px] border border-white/10 shadow-2xl"
             />
           )}
         </div>
-
-        {loading && (
-          <p className="mt-4 text-xs text-white/60 tracking-wide">
-            Generating image…
-          </p>
-        )}
-      </div>
+      )}
 
       {/* INPUT */}
-      {!isImageLoaded && (
-        <div className="mt-10 w-full max-w-md">
-          <div
-            className="
-              flex flex-col gap-3
-              bg-white/5
-              backdrop-blur-md
-              border border-white/10
-              rounded-2xl
-              p-2
-            "
-          >
-            <input
-              autoFocus
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              type="text"
-              placeholder="Describe what you want to generate"
-              className="
-                w-full bg-transparent text-white text-sm
-                px-4 py-3 outline-none
-                placeholder:text-white/40
-              "
-            />
+      {!image && (
+        <div className="mt-10 w-full max-w-2xl">
+          <div className="flex flex-col gap-3 bg-[#0A0A0A] border border-white/10 rounded-[24px] p-4">
 
-            {/* BUTTON + TOOLTIP */}
+            {/* INPUT BOX */}
+            {/* <div className="flex items-center gap-3 bg-[#0A0A0A] border border-white/10 rounded-full px-3 py-3"> */}
+            < div className="bg-[#0A0A0A] border border-white/10 rounded-3xl p-4">
+            <textarea
+  disabled={loading}
+  value={input}
+  autoFocus
+  rows={3}
+  onChange={(e) => {
+    setInput(e.target.value);
+    if (error) setError("");
+  }}
+  placeholder="Describe what you want to create..."
+  className="
+    w-full
+    resize-none
+    bg-transparent
+    outline-none
+    text-white
+    px-4
+    py-2
+    text-base
+    placeholder:text-gray-500
+    leading-7
+  "
+/>
+            </div>
+
+            {/* ERROR (FIXED POSITION) */}
+            {error && (
+              <p className="text-red-400 text-sm text-center">
+                {error}
+              </p>
+            )}
+
+            {/* BUTTON */}
             <div
               className="relative w-full"
-              onMouseEnter={() => credit === 0 && setShowTooltip(true)}
+              onMouseEnter={() => credit <= 0 && setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
             >
               <button
                 type="submit"
-                disabled={credit === 0 || loading}
+                disabled={credit <= 0 || loading || !input.trim()}
                 onClick={() => {
-                  if (credit === 0) {
+                  if (credit <= 0) {
                     setShowTooltip(true);
                     setTimeout(() => setShowTooltip(false), 2500);
                   }
                 }}
-                className={`
-                  w-full py-3 rounded-xl font-medium transition
-                  ${
-                    credit === 0
-                      ? "bg-gray-600 cursor-not-allowed text-white/60"
-                      : "bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:opacity-90 shadow-[0_10px_30px_rgba(168,85,247,0.45)]"
-                  }
-                `}
+                className={`w-full py-3 rounded-xl font-medium transition ${
+                  credit <= 0
+                    ? "bg-gray-600 cursor-not-allowed text-white/60"
+                    : "bg-white text-black hover:opacity-90"
+                }`}
               >
-                {credit === 0 ? "Daily limit reached" : "Generate Image"}
+                {loading
+                  ? "Generating..."
+                  : credit <= 0
+                  ? "Daily limit reached"
+                  : "Generate"}
               </button>
 
-              {credit === 0 && showTooltip && (
-                <div
-                  className="
-                    absolute -top-11 left-1/2 -translate-x-1/2
-                    px-3 py-1 rounded-md text-xs text-white
-                    bg-black/80 backdrop-blur-md
-                    shadow-lg whitespace-nowrap
-                  "
-                >
-                  You’ve used today’s 5 free images. Fresh credits arrive in 24
-                  hours ✨
+              {credit <= 0 && showTooltip && (
+                <div className="absolute -top-11 left-1/2 -translate-x-1/2 px-3 py-1 text-xs text-white bg-black/80 rounded-md">
+                  You’ve used today’s free credits ✨
                 </div>
               )}
+            </div>
+
+            {/* QUICK PROMPTS */}
+            <div className="mt-5 flex flex-wrap justify-center gap-2">
+              {[
+                "Cinematic Portrait",
+                "Cyberpunk City",
+                "Luxury Watch",
+                "Anime Character",
+              ].map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setInput(p)}
+                  className="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 hover:text-white"
+                >
+                  {p}
+                </button>
+              ))}
             </div>
           </div>
         </div>
       )}
 
       {/* ACTIONS */}
-      {isImageLoaded && (
-        <div className="mt-10 flex flex-col items-center gap-4">
+      {image && (
+        <div className="mt-10 flex gap-4">
           <button
             type="button"
-            onClick={() => {
-              setIsImageLoaded(false);
-              setInput("");
-              setImage(assets.sample_img_1);
-            }}
-            className="
-              relative text-sm text-purple-400 transition
-              hover:text-purple-300
-              after:absolute after:left-0 after:-bottom-1
-              after:h-[1.5px] after:w-0 after:bg-purple-500
-              after:transition-all after:duration-300
-              hover:after:w-full
-            "
+            onClick={handleReset}
+            className="px-8 py-3 rounded-full bg-white text-black"
           >
-            Generate another image
+            + Create New Image
           </button>
 
           <button
             type="button"
             onClick={() => handleDownload(image)}
-            className="
-              px-8 py-3 rounded-full
-              bg-white/5 backdrop-blur-md
-              border border-purple-500/30
-              text-white text-sm font-medium
-              shadow-[0_12px_35px_rgba(168,85,247,0.35)]
-              hover:bg-purple-600/20 hover:scale-[1.04]
-              transition
-            "
+            className="px-8 py-3 rounded-full bg-white text-black"
           >
-            Download Image
+            ↓ Download
           </button>
         </div>
       )}

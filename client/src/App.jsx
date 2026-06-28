@@ -20,26 +20,29 @@ const App = () => {
 
   const {showUserLogin}=useContext(AppContext)
 
-  return (
-    // <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-teal-50 to-orange-50'>
-      <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-[#0f0d2b] to-[#1a1640] text-white'>
+ return (
+  <div className="min-h-screen flex flex-col bg-black text-white">
 
+    <ToastContainer position="bottom-right" />
 
+    <Navber />
 
-       < ToastContainer  position='bottom-right'/>
-       <Navber/>
-      {showUserLogin && <Login/>}
+    {showUserLogin && <Login />}
+
+    {/* Main Content */}
+    <main className="flex-1">
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/result' element={<Result />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/result" element={<Result />} />
         <Route path="/gallery" element={<MyImages />} />
         <Route path="/share/:shareId" element={<SharedImage />} />
-
-
       </Routes>
-      <Footer/>
-    </div>
-  )
+    </main>
+
+    <Footer />
+
+  </div>
+);
 }
 
 export default App;

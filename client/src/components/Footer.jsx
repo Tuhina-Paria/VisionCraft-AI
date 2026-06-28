@@ -1,80 +1,88 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { assets } from "../assets/assets";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const Footer = () => {
+  const { user, setShowUserLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const onClickHandler = () => {
+    if (user) {
+      navigate("/result");
+    } else {
+      setShowUserLogin(true);
+    }
+  };
+
   return (
-    <footer className="
-      relative mt-32 px-6 py-8
-      border-t border-purple-500/20
-    ">
+    <footer className="mt-28 border-t border-white/10 bg-black">
+      <div className="max-w-7xl mx-auto px-6 py-16">
 
-      {/* subtle top glow */}
-      <div className="
-        absolute inset-x-0 top-0 -z-10
-        h-24
-        bg-gradient-to-b from-purple-600/15 to-transparent
-      " />
+        {/* Brand */}
+        <div className="text-center">
+          <h2 className="text-white text-3xl md:text-4xl font-bold tracking-tight">
+            VisionCraft.AI
+          </h2>
 
-      <div className="
-        max-w-7xl mx-auto
-        flex flex-col sm:flex-row
-        items-center justify-between
-        gap-6
-      ">
+          <p className="mt-4 max-w-2xl mx-auto text-gray-400 text-base md:text-lg leading-7">
+            Built for creators, developers, and designers.
+          </p>
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="
-            p-[3px] rounded-xl
-            bg-gradient-to-r from-purple-500 to-fuchsia-600
-            shadow-[0_0_25px_rgba(168,85,247,0.8)]
-            transition-transform duration-300
-            group-hover:scale-105
-          ">
-            <img
-              src="/favicon_icon2.png"
-              alt="VisionCraft Logo"
-              className="w-8 h-8 rounded-xl object-cover"
-            />
-          </div>
-          <span className="text-white font-semibold tracking-tight">
-            VisionCraft AI
-          </span>
-        </Link>
-
-        {/* Copyright */}
-        <p className="text-sm text-gray-400 text-center">
-          © {new Date().getFullYear()} VisionCraft AI. All rights reserved.
-        </p>
-
-         {/* Social icons */}
-        <div className="flex gap-4">
-          {[
-            assets.twitter_icon1,
-            assets.instagram_icon2,
-            assets.facebook_icon2,
-          ].map((icon, index) => (
-            <div
-              key={index}
-              className="
-                p-2 rounded-full
-                bg-white/5 backdrop-blur-md
-                border border-purple-500/20
-                transition-all duration-300
-                hover:scale-110 hover:-translate-y-1
-                hover:shadow-[0_0_18px_rgba(168,85,247,0.9)]
-              "
-            >
-              <img
-                src={icon}
-                alt="social"
-                className="w-5 h-5"
-              />
-            </div>
-          ))}
+          {/* <button
+            onClick={onClickHandler}
+            className="
+              mt-8
+              px-7
+              py-3
+              rounded-full
+              bg-white
+              text-black
+              font-semibold
+              transition-all
+              duration-300
+              hover:scale-105
+              hover:bg-neutral-100
+              active:scale-95
+            "
+          >
+            Start Creating
+          </button> */}
         </div>
 
+        {/* Navigation */}
+        <div className="mt-14 flex flex-wrap justify-center gap-8 text-sm text-gray-400">
+          <Link
+            to="/"
+            className="transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+          >
+            Home
+          </Link>
+
+          {user && (
+            <Link
+              to="/gallery"
+              className="transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+            >
+              
+            </Link>
+          )}
+        </div>
+
+        {/* Divider */}
+        <div className="mt-12 border-t border-white/10" />
+
+        {/* Bottom */}
+        <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} VisionCraft AI. All rights reserved.
+          </p>
+<p className="text-sm text-gray-500">Version 1.0</p>
+          <p className="text-sm text-gray-500">
+            Built with React • Express • MongoDB • Cloudinary
+          </p>
+
+        </div>
       </div>
     </footer>
   );

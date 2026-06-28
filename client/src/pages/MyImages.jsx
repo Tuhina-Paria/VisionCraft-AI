@@ -1,10 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 const MyImages = () => {
   const { backendUrl, token } = useContext(AppContext);
+const { user, setShowUserLogin } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,9 +45,13 @@ const MyImages = () => {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
+  if (token) {
     fetchMyImages();
-  }, []);
+  } else {
+    setLoading(false);
+  }
+}, [token]);
 
   // Handle next image in modal
   const handleNext = () => {
@@ -85,27 +93,138 @@ const MyImages = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-white/80">
-        Loading your creations...
+     
+Loading your gallery...
       </div>
     );
   }
 
+const onClickHandler = () => {
+    if (user) {
+      navigate("/result");
+    } else {
+      setShowUserLogin(true);
+    }
+  };
+
+
   return (
     <div className="min-h-screen pt-24 px-4 sm:px-6 max-w-7xl mx-auto text-white">
       {/* Heading */}
-      <div className="mb-10 text-center sm:text-left">
-        <h1 className="text-2xl sm:text-3xl font-semibold">My Images</h1>
-        <p className="text-white/50 text-sm mt-1">
-          Your AI-generated creations
-        </p>
-      </div>
+     {/* Premium Heading */}
+<div className="flex flex-col items-center justify-center text-center mb-20">
+  <span
+    className="
+      px-4
+      py-1.5
+      rounded-full
+      border
+      border-white/10
+      bg-white/[0.03]
+      text-xs
+      uppercase
+      tracking-[0.25em]
+      text-white/50
+      mb-6
+    "
+  >
+    Personal Gallery
+  </span>
+
+  <h1
+    className="
+      text-5xl
+      md:text-6xl
+      font-bold
+      tracking-[-0.04em]
+      text-white
+    "
+  >
+    My Images
+  </h1>
+
+  <p
+    className="
+      mt-6
+      max-w-2xl
+      text-lg
+      leading-8
+      text-gray-500
+    "
+  >
+    Every image you've created with VisionCraft lives here.
+    Browse, download, and share your AI-generated artwork.
+  </p>
+</div>
 
       {images.length === 0 ? (
-        <div className="text-center text-white/60 mt-20">
-          You haven’t generated any images yet.
+       <div className="flex flex-col items-center justify-center py-24">
+        <div
+  className="
+    w-24
+    h-24
+    rounded-full
+    border
+    border-white/10
+    bg-white/[0.03]
+    flex
+    items-center
+    justify-center
+    text-4xl
+    mb-8
+  "
+>
+  🖼️
+</div>
+
+<h2
+  className="
+    text-4xl
+    md:text-5xl
+    font-bold
+    tracking-tight
+    text-white
+  "
+>
+  No Images Yet
+</h2>
+
+<p
+  className="
+    mt-6
+    max-w-lg
+    text-center
+    text-gray-500
+    leading-8
+  "
+>
+  Start creating beautiful AI artwork. Every generated image will
+  automatically appear in your personal gallery.
+</p>
+
+<motion.button
+  onClick={onClickHandler}
+  whileHover={{ scale: 1.03 }}
+  whileTap={{ scale: 0.97 }}
+  className="
+    mt-12
+    px-10
+    py-4
+    rounded-full
+    bg-white
+    text-black
+    font-semibold
+    text-lg
+    hover:opacity-90
+    transition-all
+    duration-300
+  "
+>
+  Create Your First Image
+</motion.button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((img, index) => (
             <motion.div
               key={img._id}
