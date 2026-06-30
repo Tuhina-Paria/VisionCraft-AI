@@ -197,33 +197,7 @@ npm run dev
 
 
 
-# 📸 Screenshots
 
-## Home Page
-
-<p align="center">
-<img src="screenshots/home.png" width="45%">
-<img src="screenshots/home1.png" width="45%">
-</p>
-
----
-
-## AI Image Generation
-
-<p align="center">
-<img src="screenshots/generate.png" width="75%">
-</p>
-
----
-
-## Personal Gallery
-
-<p align="center">
-<img src="screenshots/gallery.png" width="45%">
-<img src="screenshots/preview.png" width="45%">
-</p>
-
----
 
 # 🎯 Why I Built This
 
