@@ -157,7 +157,7 @@ BACKEND_URL=
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/VisionCraft-AI.git
+git clone https://github.com/Tuhina-Paria/VisionCraft-AI.git
 ```
 
 Move into the project
@@ -253,7 +253,7 @@ The goal was to create a production-like application that demonstrates real-worl
 
 Full Stack Developer
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/Tuhina-Paria
 
 LinkedIn: https://linkedin.com/in/yourlinkedin
 
