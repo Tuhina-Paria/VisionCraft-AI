@@ -1,141 +1,263 @@
-# VisionCraft AI 🎨
+# VisionCraft AI — Full Stack AI Image Generation Platform
 
-VisionCraft AI is a full-stack AI image generation platform that allows users to generate images using AI, manage daily credits, and share images publicly with secure access controls.
+VisionCraft AI is a modern full-stack AI image generation platform built with the MERN stack. Users can generate AI-powered images from text prompts, manage their creations in a personal gallery, download images, and share them through public links.
 
-The platform is designed with a clean UI, credit-based usage system, and secure backend APIs.
+The project focuses on building a real-world production-like application with authentication, secure backend APIs, cloud storage, responsive UI, and a clean user experience.
 
 ---
 
-## 🚀 Tech Stack
+## 🌐 Live Demo
 
-### Frontend
-- React
+**Frontend:** https://your-vercel-link.vercel.app
+
+**Backend:** https://your-render-link.onrender.com
+
+---
+
+## ✨ Features
+
+### 🎨 AI Image Generation
+Generate high-quality AI images from natural language prompts.
+
+### 🔐 Secure Authentication
+- JWT Authentication
+- Protected Routes
+- Secure API Access
+
+### 🖼 Personal Gallery
+- View all generated images
+- Full-screen image preview
+- Image navigation
+- Responsive gallery layout
+
+### 📥 Image Download
+Download generated images directly to your device.
+
+### 🔗 Public Image Sharing
+Generate public share links that can be viewed without logging in.
+
+### 💳 Daily Credit System
+- Daily free credits
+- Automatic credit reset
+- Usage limitation for fair access
+
+### 📱 Responsive Design
+Optimized for desktop, tablet, and mobile devices.
+
+### ✨ Modern UI
+- Dark minimal design
+- Smooth Framer Motion animations
+- Interactive user experience
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React.js
 - Tailwind CSS
 - Context API
+- React Router DOM
+- Axios
+- Framer Motion
 
-### Backend
+## Backend
+
 - Node.js
 - Express.js
-- MongoDB (Mongoose)
-- Cloudinary (image storage)
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- Cloudinary
+
+## AI Integration
+
+- ClipDrop API
 
 ---
 
-## ✨ Key Features
+# 📂 Project Structure
 
-- **AI Image Generation**  
-  Generate high-quality AI images using text prompts.
-
-- **Daily Credit Reset System**  
-  Users receive daily credits automatically, ensuring fair usage of AI resources.
-
-- **Image Gallery with Full-Screen Preview**  
-  Browse generated images in a gallery with full-screen preview support.
-
-- **Public Shareable Links**  
-  Share images publicly without requiring user login.
-
-- **Secure Image Downloads**  
-  Image downloads are protected and require authenticated access.
-
----
-
-## 🔐 Authentication & Security
-- JWT-based authentication
-- Protected API routes for sensitive operations
-- Secure handling of environment variables using `.env`
-
----
-
-## 📁 Project Structure
-
-VisionCraft-AI/
-├── client/ # React frontend
-├── server/ # Node.js backend
-├── .gitignore
-├── README.md
+```
+VisionCraft-AI
+│
+├── client
+│   ├── assets
+│   ├── components
+│   ├── context
+│   ├── pages
+│   └── App.jsx
+│
+├── server
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   └── server.js
+│
+└── README.md
+```
 
 ---
 
-## ⚙️ Setup Instructions
+# 🔥 Application Workflow
 
-### 1️⃣ Clone the Repository
+```
+User
 
-git clone <your-repo-url>
+↓
+
+React Frontend
+
+↓
+
+Express REST API
+
+↓
+
+MongoDB Database
+
+↓
+
+Cloudinary Storage
+
+↓
+
+Generated Image
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file inside the **server** folder.
+
+```env
+MONGO_URI=
+
+JWT_SECRET=
+
+CLIPDROP_API=
+
+CLOUDINARY_NAME=
+
+CLOUDINARY_API_KEY=
+
+CLOUDINARY_API_SECRET=
+
+BACKEND_URL=
+```
+
+---
+
+# ⚙ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/VisionCraft-AI.git
+```
+
+Move into the project
+
+```bash
 cd VisionCraft-AI
+```
 
-### 2️⃣ Environment Variables Setup
-Create .env files in both client and server directories using .env.example as reference.
+Install frontend dependencies
 
-Example (server .env):
-
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
-CLOUDINARY_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-BACKEND_URL=your backend_url
-
-### 3️⃣ Install Dependencies
-Frontend:
-
+```bash
 cd client
 npm install
+```
 
-Backend:
+Install backend dependencies
 
-cd server
+```bash
+cd ../server
 npm install
+```
 
+Start backend
 
-### 4️⃣ Run the Application
-Start Backend Server:
-cd server
+```bash
 npm run dev
+```
 
-Start Frontend:
-cd client
+Start frontend
+
+```bash
+cd ../client
 npm run dev
+```
 
-📌 Notes
-
-Ensure MongoDB is running locally or connected via MongoDB Atlas.
-
-Cloudinary credentials are required for image uploads.
-
-.env files are intentionally excluded from version control for security.
+---
 
 
 
-### 🔮Future Enhancements
+# 📸 Screenshots
 
--Forgot / Reset password via email
--User profile management
--Payment-based credit system
+## Home Page
+
+<p align="center">
+<img src="screenshots/home.png" width="45%">
+<img src="screenshots/home1.png" width="45%">
+</p>
+
+---
+
+## AI Image Generation
+
+<p align="center">
+<img src="screenshots/generate.png" width="75%">
+</p>
+
+---
+
+## Personal Gallery
+
+<p align="center">
+<img src="screenshots/gallery.png" width="45%">
+<img src="screenshots/preview.png" width="45%">
+</p>
+
+---
+
+# 🎯 Why I Built This
+
+I built VisionCraft AI to strengthen my full-stack development skills by combining frontend development, backend APIs, authentication, cloud storage, database management, and AI integration into one complete project.
+
+The goal was to create a production-like application that demonstrates real-world development practices rather than a simple tutorial project.
+
+---
+
+# 🚀 Future Improvements
+
+- Email Verification
+- Forgot Password
+- Password Reset
+- Payment Integration
+- Image Collections
+- Prompt History
+- AI Image Editing
+- Image Search
+- AI Upscaling
+
+---
+
+# 👩‍💻 Author
+
+**Tuhina Paria**
+
+Full Stack Developer
+
+GitHub: https://github.com/yourusername
+
+LinkedIn: https://linkedin.com/in/yourlinkedin
 
 
 ---
 
-## 🖼️ Screenshots
-
-### Home 
-<p align="center">
-  <img src="screenshots/home.png" width="45%" />
-  <img src="screenshots/home1.png" width="45%" />
-</p>
-
-### & AI Generation
-<p align="center">
-  <img src="screenshots/generate.png" width="45%" />
-</p>
-
-### Gallery & Full-Screen Preview
-<p align="center">
-  <img src="screenshots/gallery.png" width="45%" />
-  <img src="screenshots/preview.png" width="45%" />
-</p>
-
-
-🧑‍💻 Author
-
-Built by Tuhina
+## ⭐ If you found this project useful, consider giving it a star!
