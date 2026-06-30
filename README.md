@@ -8,9 +8,9 @@ The project focuses on building a real-world production-like application with au
 
 ## 🌐 Live Demo
 
-**Frontend:** https://your-vercel-link.vercel.app
+**Frontend:** [https://your-vercel-link.vercel.app](https://vision-craft-ai-gamma.vercel.app/)
 
-**Backend:** https://your-render-link.onrender.com
+**Backend:**[ https://your-render-link.onrender.com](https://visioncraft-backend-kphd.onrender.com)
 
 ---
 
